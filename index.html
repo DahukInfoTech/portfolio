@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dahuk Info Tech - Digital Marketing & Software Development</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Styles based on Material 3 principles */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Light Theme (Default) */
+        :root {
+            --background: #fef7ff;
+            --on-background: #1d1b20;
+            --primary: #6750a4;
+            --on-primary: #ffffff;
+            --primary-container: #eaddff;
+            --on-primary-container: #21005d;
+            --secondary-container: #e8def8;
+            --on-secondary-container: #1d192b;
+            --surface: #fef7ff;
+            --surface-variant: #e7e0ec;
+            --on-surface-variant: #49454f;
+            --outline: #79747e;
+            --outline-variant: #cac4d0;
+            --shadow-color: #000000;
+            --ripple-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark Theme */
+        .dark {
+            --background: #1d1b20;
+            --on-background: #e6e1e5;
+            --primary: #d0bcff;
+            --on-primary: #381e72;
+            --primary-container: #4f378b;
+            --on-primary-container: #eaddff;
+            --secondary-container: #4a4458;
+            --on-secondary-container: #e8def8;
+            --surface: #1d1b20;
+            --surface-variant: #49454f;
+            --on-surface-variant: #cac4d0;
+            --outline: #938f99;
+            --outline-variant: #49454f;
+            --shadow-color: #000000;
+            --ripple-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Applying theme colors using CSS variables */
+        body {
+            background-color: var(--background);
+            color: var(--on-background);
+        }
+
+        .bg-surface {
+            background-color: var(--surface);
+        }
+
+        .bg-surface-variant {
+            background-color: var(--surface-variant);
+        }
+
+        .text-on-surface-variant {
+            color: var(--on-surface-variant);
+        }
+
+        .bg-primary {
+            background-color: var(--primary);
+        }
+
+        .text-on-primary {
+            color: var(--on-primary);
+        }
+
+        .bg-primary-container {
+            background-color: var(--primary-container);
+        }
+
+        .text-on-primary-container {
+            color: var(--on-primary-container);
+        }
+
+        .bg-secondary-container {
+            background-color: var(--secondary-container);
+        }
+
+        .text-on-secondary-container {
+            color: var(--on-secondary-container);
+        }
+
+        .border-outline {
+            border-color: var(--outline);
+        }
+
+        .border-outline-variant {
+            border-color: var(--outline-variant);
+        }
+
+        .shadow-custom {
+            box-shadow: 0 1px 2px 0 rgba(var(--shadow-color), 0.05), 0 1px 3px 1px rgba(var(--shadow-color), 0.1);
+        }
+
+        .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(var(--shadow-color), 0.1), 0 2px 4px -2px rgba(var(--shadow-color), 0.1);
+        }
+
+        .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(var(--shadow-color), 0.1), 0 4px 6px -4px rgba(var(--shadow-color), 0.1);
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Ripple Effect Styles */
+        .ripple-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 600ms linear;
+            background-color: var(--ripple-color);
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Modernized Component Styles */
+        .skill-tag {
+            @apply bg-secondary-container text-on-secondary-container text-sm font-medium px-3 py-1 rounded-full;
+        }
+
+        .project-tag {
+            @apply bg-primary-container text-on-primary-container text-xs font-medium px-2 py-1 rounded-full;
+        }
+
+        /* Nav Link Hover Effect */
+        .nav-link {
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 32px;
+            /* Pill shape height */
+            background-color: var(--primary-container);
+            border-radius: 9999px;
+            /* Pill shape */
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: -1;
+        }
+
+        .nav-link:hover::before {
+            opacity: 1;
+        }
+
+        .nav-link:hover {
+            color: var(--on-primary-container);
+        }
+
+        /* Scroll Animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-shadow duration-300">
+        <div class="absolute inset-0 bg-surface/80 backdrop-blur-lg"></div>
+        <div class="relative container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-primary">Dahuk Info Tech</a>
+                </div>
+                <div class="hidden md:block">
+                    <nav class="flex items-center space-x-2">
+                        <a href="#home"
+                            class="nav-link text-on-surface-variant px-3 py-2 rounded-full text-sm font-medium">Home</a>
+                        <a href="#skills"
+                            class="nav-link text-on-surface-variant px-3 py-2 rounded-full text-sm font-medium">Skills</a>
+                        <a href="#projects"
+                            class="nav-link text-on-surface-variant px-3 py-2 rounded-full text-sm font-medium">Projects</a>
+                        <a href="#contact"
+                            class="nav-link text-on-surface-variant px-3 py-2 rounded-full text-sm font-medium">Contact</a>
+                        <button id="theme-toggle"
+                            class="ripple-container p-2 rounded-full hover:bg-surface-variant ml-3">
+                            <i data-lucide="sun" class="h-5 w-5 block dark:hidden"></i>
+                            <i data-lucide="moon" class="h-5 w-5 hidden dark:block"></i>
+                        </button>
+                    </nav>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="theme-toggle-mobile"
+                        class="ripple-container p-2 rounded-full hover:bg-surface-variant mr-2">
+                        <i data-lucide="sun" class="h-5 w-5 block dark:hidden"></i>
+                        <i data-lucide="moon" class="h-5 w-5 hidden dark:block"></i>
+                    </button>
+                    <button id="mobile-menu-button"
+                        class="ripple-container p-2 rounded-md text-on-surface-variant hover:bg-surface-variant focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden relative bg-surface/95">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home"
+                    class="ripple-container block text-on-surface-variant hover:text-primary px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#skills"
+                    class="ripple-container block text-on-surface-variant hover:text-primary px-3 py-2 rounded-md text-base font-medium">Skills</a>
+                <a href="#projects"
+                    class="ripple-container block text-on-surface-variant hover:text-primary px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#contact"
+                    class="ripple-container block text-on-surface-variant hover:text-primary px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-16">
+        <section id="home" class="min-h-[calc(100vh-4rem)] flex items-center">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-on-primary-container">
+                    Dahuk Info Tech
+                </h1>
+                <h2 class="mt-4 text-2xl md:text-3xl font-semibold bg-clip-text text-transparent"
+                    style="background-image: linear-gradient(to right, var(--primary), #9575cd);">
+                    Digital Marketing & Full-Stack Development
+                </h2>
+                <p class="mt-6 max-w-2xl mx-auto text-lg text-on-surface-variant">
+                    From West Bengal, India. I craft innovative digital solutions, from dynamic websites and mobile apps
+                    to robust software and engaging games. Let's build something amazing together.
+                </p>
+                <div class="mt-8 flex justify-center gap-4 flex-wrap">
+                    <a href="#projects"
+                        class="ripple-container inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-on-primary bg-primary hover:shadow-lg hover:opacity-90 transition-all duration-300">
+                        View My Work
+                    </a>
+                    <a href="#contact"
+                        class="ripple-container inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-base font-medium rounded-full text-primary bg-transparent hover:bg-primary-container transition-colors duration-300">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 sm:py-28 bg-secondary-container/30">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center animate-on-scroll">
+                    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">My Technical Expertise</h2>
+                    <p class="mt-4 text-lg text-on-surface-variant">A showcase of technologies I work with.</p>
+                </div>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="animate-on-scroll">
+                        <div
+                            class="ripple-container bg-surface rounded-2xl p-6 border border-outline-variant hover:border-outline transition-all duration-300 h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-primary-container p-3 rounded-full"><i data-lucide="globe-2"
+                                        class="h-6 w-6 text-on-primary-container"></i></div>
+                                <h3 class="text-xl font-semibold">Web Development</h3>
+                            </div>
+                            <div class="mt-4 flex flex-wrap gap-2"><span class="skill-tag">React</span><span
+                                    class="skill-tag">Next.js</span><span class="skill-tag">JavaScript</span><span
+                                    class="skill-tag">TypeScript</span><span class="skill-tag">PHP</span><span
+                                    class="skill-tag">Tailwind CSS</span><span class="skill-tag">Bootstrap</span></div>
+                        </div>
+                    </div>
+                    <div class="animate-on-scroll" style="animation-delay: 150ms;">
+                        <div
+                            class="ripple-container bg-surface rounded-2xl p-6 border border-outline-variant hover:border-outline transition-all duration-300 h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-primary-container p-3 rounded-full"><i data-lucide="smartphone"
+                                        class="h-6 w-6 text-on-primary-container"></i></div>
+                                <h3 class="text-xl font-semibold">Mobile Development</h3>
+                            </div>
+                            <div class="mt-4 flex flex-wrap gap-2"><span class="skill-tag">Android</span><span
+                                    class="skill-tag">Kotlin</span><span class="skill-tag">Java</span><span
+                                    class="skill-tag">Dart</span><span class="skill-tag">iOS</span></div>
+                        </div>
+                    </div>
+                    <div class="animate-on-scroll" style="animation-delay: 300ms;">
+                        <div
+                            class="ripple-container bg-surface rounded-2xl p-6 border border-outline-variant hover:border-outline transition-all duration-300 h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-primary-container p-3 rounded-full"><i data-lucide="database"
+                                        class="h-6 w-6 text-on-primary-container"></i></div>
+                                <h3 class="text-xl font-semibold">Databases</h3>
+                            </div>
+                            <div class="mt-4 flex flex-wrap gap-2"><span class="skill-tag">MySQL</span><span
+                                    class="skill-tag">MongoDB</span><span class="skill-tag">SQLite</span></div>
+                        </div>
+                    </div>
+                    <div class="animate-on-scroll">
+                        <div
+                            class="ripple-container bg-surface rounded-2xl p-6 border border-outline-variant hover:border-outline transition-all duration-300 h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-primary-container p-3 rounded-full"><i data-lucide="laptop"
+                                        class="h-6 w-6 text-on-primary-container"></i></div>
+                                <h3 class="text-xl font-semibold">Desktop & General</h3>
+                            </div>
+                            <div class="mt-4 flex flex-wrap gap-2"><span class="skill-tag">Python</span><span
+                                    class="skill-tag">C#</span><span class="skill-tag">Java</span></div>
+                        </div>
+                    </div>
+                    <div class="animate-on-scroll" style="animation-delay: 150ms;">
+                        <div
+                            class="ripple-container bg-surface rounded-2xl p-6 border border-outline-variant hover:border-outline transition-all duration-300 h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-primary-container p-3 rounded-full"><i data-lucide="gamepad-2"
+                                        class="h-6 w-6 text-on-primary-container"></i></div>
+                                <h3 class="text-xl font-semibold">Game Development</h3>
+                            </div>
+                            <div class="mt-4 flex flex-wrap gap-2"><span class="skill-tag">Unity</span></div>
+                        </div>
+                    </div>
+                    <div class="animate-on-scroll" style="animation-delay: 300ms;">
+                        <div
+                            class="ripple-container bg-surface rounded-2xl p-6 border border-outline-variant hover:border-outline transition-all duration-300 h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-primary-container p-3 rounded-full"><i data-lucide="shield-check"
+                                        class="h-6 w-6 text-on-primary-container"></i></div>
+                                <h3 class="text-xl font-semibold">Specialized Skills</h3>
+                            </div>
+                            <div class="mt-4 flex flex-wrap gap-2"><span class="skill-tag">Cyber Security</span><span
+                                    class="skill-tag">Android Modding</span><span class="skill-tag">Custom
+                                    ROMs</span><span class="skill-tag">Smali Editing</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 sm:py-28">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center animate-on-scroll">
+                    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Featured Projects</h2>
+                    <p class="mt-4 text-lg text-on-surface-variant">Here are a few examples of my work. More on my
+                        GitHub!</p>
+                </div>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div
+                        class="ripple-container animate-on-scroll bg-surface rounded-2xl border border-outline-variant overflow-hidden flex flex-col transform hover:-translate-y-1 hover:border-outline transition-all duration-300">
+                        <img src="https://placehold.co/600x400/eaddff/21005d?text=E-Commerce+Platform" alt="Project 1"
+                            class="w-full h-48 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-xl font-semibold text-on-surface-variant">E-Commerce Platform</h3>
+                            <p class="mt-2 text-on-surface-variant/80 flex-grow">A full-featured e-commerce site built
+                                with React, Next.js, and MongoDB, offering a seamless shopping experience.</p>
+                            <div class="mt-4 flex flex-wrap gap-2"><span class="project-tag">React</span><span
+                                    class="project-tag">Next.js</span><span class="project-tag">MongoDB</span></div>
+                            <div class="mt-6 flex gap-4"><a href="#"
+                                    class="text-primary font-semibold hover:underline">Live Demo</a><a href="#"
+                                    class="text-primary font-semibold hover:underline">GitHub</a></div>
+                        </div>
+                    </div>
+                    <div class="ripple-container animate-on-scroll bg-surface rounded-2xl border border-outline-variant overflow-hidden flex flex-col transform hover:-translate-y-1 hover:border-outline transition-all duration-300"
+                        style="animation-delay: 150ms;">
+                        <img src="https://placehold.co/600x400/e8def8/1d192b?text=Android+Task+Manager" alt="Project 2"
+                            class="w-full h-48 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-xl font-semibold text-on-surface-variant">Android Task Manager</h3>
+                            <p class="mt-2 text-on-surface-variant/80 flex-grow">A native Android application developed
+                                in Kotlin for efficient task management and productivity.</p>
+                            <div class="mt-4 flex flex-wrap gap-2"><span class="project-tag">Android</span><span
+                                    class="project-tag">Kotlin</span><span class="project-tag">SQLite</span></div>
+                            <div class="mt-6 flex gap-4"><a href="#"
+                                    class="text-primary font-semibold hover:underline">Play Store</a><a href="#"
+                                    class="text-primary font-semibold hover:underline">GitHub</a></div>
+                        </div>
+                    </div>
+                    <div class="ripple-container animate-on-scroll bg-surface rounded-2xl border border-outline-variant overflow-hidden flex flex-col transform hover:-translate-y-1 hover:border-outline transition-all duration-300"
+                        style="animation-delay: 300ms;">
+                        <img src="https://placehold.co/600x400/d0bcff/381e72?text=Unity+2D+Platformer" alt="Project 3"
+                            class="w-full h-48 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-xl font-semibold text-on-surface-variant">Unity 2D Platformer</h3>
+                            <p class="mt-2 text-on-surface-variant/80 flex-grow">An engaging 2D platformer game built
+                                with Unity and C#, featuring custom physics and level design.</p>
+                            <div class="mt-4 flex flex-wrap gap-2"><span class="project-tag">Unity</span><span
+                                    class="project-tag">C#</span><span class="project-tag">Game Dev</span></div>
+                            <div class="mt-6 flex gap-4"><a href="#"
+                                    class="text-primary font-semibold hover:underline">Play Game</a><a href="#"
+                                    class="text-primary font-semibold hover:underline">GitHub</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 sm:py-28 bg-primary-container/30">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center animate-on-scroll">
+                    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Let's Connect</h2>
+                    <p class="mt-4 text-lg text-on-surface-variant">I'm currently available for freelance work and open
+                        to new opportunities. Feel free to reach out!</p>
+                </div>
+                <div class="ripple-container mt-12 max-w-lg mx-auto bg-surface p-8 rounded-2xl shadow-lg animate-on-scroll"
+                    style="animation-delay: 150ms;">
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-secondary-container p-3 rounded-full"><i data-lucide="mail"
+                                    class="h-6 w-6 text-on-secondary-container"></i></div>
+                            <div>
+                                <h3 class="text-lg font-medium">Email</h3><a href="mailto:dahukinfotech@gmail.com"
+                                    class="ripple-container text-primary hover:underline">dahukinfotech@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="bg-secondary-container p-3 rounded-full"><i data-lucide="phone"
+                                    class="h-6 w-6 text-on-secondary-container"></i></div>
+                            <div>
+                                <h3 class="text-lg font-medium">Phone</h3><a href="tel:+918348313317"
+                                    class="ripple-container text-primary hover:underline">+91 83483 13317</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="bg-secondary-container p-3 rounded-full"><i data-lucide="map-pin"
+                                    class="h-6 w-6 text-on-secondary-container"></i></div>
+                            <div>
+                                <h3 class="text-lg font-medium">Location</h3>
+                                <p class="text-on-surface-variant">Murshidabad, West Bengal, India</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-outline text-center">
+                        <p class="text-on-surface-variant mb-4">Find me on</p>
+                        <div class="flex justify-center gap-6">
+                            <a href="#"
+                                class="ripple-container text-on-surface-variant hover:text-primary p-2 rounded-full"><i
+                                    data-lucide="github" class="h-7 w-7"></i></a>
+                            <a href="#"
+                                class="ripple-container text-on-surface-variant hover:text-primary p-2 rounded-full"><i
+                                    data-lucide="linkedin" class="h-7 w-7"></i></a>
+                            <a href="#"
+                                class="ripple-container text-on-surface-variant hover:text-primary p-2 rounded-full"><i
+                                    data-lucide="twitter" class="h-7 w-7"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-surface-variant">
+        <div class="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-on-surface-variant">
+            <p>&copy; 2025 Dahuk Info Tech. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Lucide Icons ---
+            lucide.createIcons();
+
+            // --- Theme Toggler ---
+            const themeToggleBtns = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+            const htmlEl = document.documentElement;
+            const applyTheme = (theme) => {
+                htmlEl.classList.remove('dark', 'light');
+                htmlEl.classList.add(theme);
+                localStorage.setItem('theme', theme);
+            };
+            const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            applyTheme(currentTheme);
+
+            themeToggleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const newTheme = htmlEl.classList.contains('dark') ? 'light' : 'dark';
+                    applyTheme(newTheme);
+                });
+            });
+
+            // --- Mobile Menu ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+
+            // --- Header Shadow on Scroll ---
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('shadow-md', window.scrollY > 10);
+            });
+
+            // --- Modern Scroll Animations ---
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                scrollObserver.observe(el);
+            });
+
+            // --- Accurate Ripple Effect ---
+            function createRipple(event) {
+                const element = event.currentTarget;
+
+                const circle = document.createElement("span");
+                const diameter = Math.max(element.clientWidth, element.clientHeight);
+                const radius = diameter / 2;
+
+                // Using getBoundingClientRect for accuracy relative to viewport
+                const rect = element.getBoundingClientRect();
+                circle.style.width = circle.style.height = `${diameter}px`;
+                circle.style.left = `${event.clientX - rect.left - radius}px`;
+                circle.style.top = `${event.clientY - rect.top - radius}px`;
+                circle.classList.add("ripple-effect");
+
+                const existingRipple = element.getElementsByClassName("ripple-effect")[0];
+                if (existingRipple) {
+                    existingRipple.remove();
+                }
+
+                element.appendChild(circle);
+            }
+
+            const rippleElements = document.querySelectorAll(".ripple-container");
+            rippleElements.forEach(element => {
+                element.addEventListener("click", createRipple);
+            });
+        });
+    </script>
+</body>
+
+</html>
